@@ -16,6 +16,7 @@ export default function Header() {
 
     const navLinks = [
         { to: '/', label: 'Home' },
+        { to: '/featured', label: 'Featured' },
         { to: '/products', label: 'Products' },
     ];
 
@@ -27,10 +28,12 @@ export default function Header() {
 
     return (
         <>
-            {/* Top banner */}
-            <div style={{ background: '#2D5016', color: 'white' }} className="text-center py-2 text-sm font-medium tracking-wide">
-                {config.banner_text || '🌿 Sustainably sourced — Free shipping over ₱2,000'}
-            </div>
+            {/* Top Announcement Banner */}
+            {config?.banner_text && (
+                <div style={{ background: '#1f3a0f', color: 'white', textAlign: 'center', padding: '8px 16px', fontSize: '13px', fontWeight: 500, letterSpacing: '0.02em' }}>
+                    {config.banner_text}
+                </div>
+            )}
 
             {/* Main header */}
             <header style={{ background: 'rgba(255,248,240,0.95)', borderBottom: '1px solid #e5d5c0', backdropFilter: 'blur(12px)' }}
@@ -39,11 +42,9 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2 group" style={{ textDecoration: 'none' }}>
-                            <div style={{ background: '#2D5016', borderRadius: '10px', padding: '6px' }} className="group-hover:scale-105 transition-transform">
-                                <Leaf size={20} color="white" />
-                            </div>
+                            <img src="/images/logo-green.png" alt="CoirCraft PH Logo" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} className="group-hover:scale-105 transition-transform" />
                             <div>
-                                <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '18px' }}>CocoFiber</span>
+                                <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '18px' }}>CoirCraft</span>
                                 <span style={{ color: '#D4A843', fontWeight: 700, fontSize: '18px' }}> PH</span>
                             </div>
                         </Link>

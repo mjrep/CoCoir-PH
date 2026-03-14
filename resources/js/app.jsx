@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import AppRouter from './AppRouter.jsx';
 import { AuthProvider, useAuth } from './contexts/AuthContext.jsx';
 import { CartProvider } from './contexts/CartContext.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import { seedIfNeeded } from './lib/db.js';
 import '../css/app.css';
 
@@ -48,6 +49,7 @@ if (appEl) {
         <React.StrictMode>
             <ErrorBoundary>
                 <HashRouter>
+                    <ScrollToTop />
                     <AuthProvider>
                         <AppWithCart />
                     </AuthProvider>

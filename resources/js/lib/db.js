@@ -6,6 +6,7 @@ const KEYS = {
     CART: 'coco_cart',
     USERS: 'coco_users',
     STOREFRONT: 'coco_storefront',
+    CATEGORIES: 'coco_categories',
     SEEDED: 'coco_seeded',
 };
 
@@ -108,14 +109,35 @@ export const Users = {
     },
 };
 
+// ── Categories ──────────────────────────────────────────────────
+export const Categories = {
+    getAll: () => read(KEYS.CATEGORIES),
+    getById: (id) => read(KEYS.CATEGORIES).find(c => c.id === id),
+    create: (data) => {
+        const items = read(KEYS.CATEGORIES);
+        const item = { ...data, id: Date.now().toString(36) + Math.random().toString(36).substr(2), created_at: new Date().toISOString() };
+        items.push(item);
+        write(KEYS.CATEGORIES, items);
+        return item;
+    },
+    update: (id, data) => {
+        const items = read(KEYS.CATEGORIES).map(c => c.id === id ? { ...c, ...data } : c);
+        write(KEYS.CATEGORIES, items);
+        return items.find(c => c.id === id);
+    },
+    delete: (id) => {
+        write(KEYS.CATEGORIES, read(KEYS.CATEGORIES).filter(c => c.id !== id));
+    },
+};
+
 // ── Storefront ──────────────────────────────────────────────────
 export const Storefront = {
     get: () => readOne(KEYS.STOREFRONT) || {
-        hero_title: 'From Husk to Home',
-        hero_subtitle: 'Premium coconut coir products sustainably harvested from Philippine farms.',
+        hero_title: 'Natural Coconut Coir Products',
+        hero_subtitle: 'Discover premium, eco-friendly products made from Philippine coconut fiber. Sustainable solutions for construction, gardening, and everyday living.',
         hero_image: '',
         banner_text: '🌿 Sustainably sourced — Free shipping over ₱2,000',
-        promo_text: 'NEW ARRIVALS',
+        promo_text: '100% Natural & Eco-Friendly',
     },
     save: (data) => write(KEYS.STOREFRONT, data),
     update: (data) => write(KEYS.STOREFRONT, data),
@@ -123,6 +145,20 @@ export const Storefront = {
 
 // ── Seeder ──────────────────────────────────────────────────────
 export function seedIfNeeded() {
+    if (read(KEYS.CATEGORIES).length === 0) {
+        const sampleCategories = [
+            { name: 'Coir Rope', description: 'Durable twisted coconut coir rope.' },
+            { name: 'Coir Mat', description: 'Handwoven coir door mats.' },
+            { name: 'Coir Pot', description: 'Natural coconut coir liner pots.' },
+            { name: 'Coir Board', description: 'Compressed coir fiber boards.' },
+            { name: 'Coir Fiber', description: 'Premium grade loose coir fiber.' },
+            { name: 'Coir Grow Bag', description: 'Ready-to-use coconut coir grow bags.' },
+            { name: 'Coir Net', description: 'Biodegradable coir netting.' },
+            { name: 'Other', description: 'Other coir products.' }
+        ];
+        sampleCategories.forEach(c => Categories.create(c));
+    }
+
     if (localStorage.getItem(KEYS.SEEDED)) return;
 
     const sampleProducts = [
@@ -149,8 +185,8 @@ export function seedIfNeeded() {
 
     // Demo users
     const users = [
-        { email: 'buyer@cocofiber.ph', password: 'password', name: 'Juan dela Cruz', role: 'user', mobile_number: '09171234567', address: '123 Aguinaldo St, Quezon City', profile_image: '' },
-        { email: 'admin@cocofiber.ph', password: 'password', name: 'Maria Santos', role: 'admin', mobile_number: '09281234567', address: '456 Rizal Ave, Manila', profile_image: '' },
+        { email: 'buyer@coircraft.ph', password: 'password', name: 'Juan dela Cruz', role: 'user', mobile_number: '09171234567', address: '123 Aguinaldo St, Quezon City', profile_image: '' },
+        { email: 'admin@coircraft.ph', password: 'password', name: 'Maria Santos', role: 'admin', mobile_number: '09281234567', address: '456 Rizal Ave, Manila', profile_image: '' },
     ];
     users.forEach(u => {
         const items = read(KEYS.USERS);
@@ -163,7 +199,7 @@ export function seedIfNeeded() {
     if (productIds.length >= 2) {
         const sampleOrders = [
             {
-                user_email: 'buyer@cocofiber.ph',
+                user_email: 'buyer@coircraft.ph',
                 user_name: 'Juan dela Cruz',
                 items: [
                     { product_id: productIds[0].id, product_name: productIds[0].name, product_image: productIds[0].image_url, product_price: productIds[0].price, quantity: 2 },
@@ -178,7 +214,7 @@ export function seedIfNeeded() {
                 created_at: new Date(Date.now() - 7 * 86400000).toISOString(),
             },
             {
-                user_email: 'buyer@cocofiber.ph',
+                user_email: 'buyer@coircraft.ph',
                 user_name: 'Juan dela Cruz',
                 items: [{ product_id: productIds[2].id, product_name: productIds[2].name, product_image: productIds[2].image_url, product_price: productIds[2].price, quantity: 1 }],
                 total_amount: productIds[2].price,

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
-import { Products } from '../../lib/db.js';
+import { Products, Categories } from '../../lib/db.js';
 import ProductCard from '../../components/ProductCard.jsx';
 
-const CATEGORIES = ['Coir Rope', 'Coir Mat', 'Coir Net', 'Coir Pot', 'Coir Board', 'Coir Fiber', 'Coir Grow Bag', 'Other'];
 const SORTS = [
     { value: 'newest', label: 'Newest' },
     { value: 'price_asc', label: 'Price: Low to High' },
@@ -28,6 +27,7 @@ function Skeleton() {
 export default function ProductsPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('newest');
@@ -40,6 +40,7 @@ export default function ProductsPage() {
         setLoading(true);
         setTimeout(() => {
             setProducts(Products.getActive());
+            setCategories(Categories.getAll().map(c => c.name).sort());
             setLoading(false);
         }, 400);
     }, []);
@@ -104,7 +105,7 @@ export default function ProductsPage() {
 
                 {/* Category chips */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
-                    {CATEGORIES.map(cat => (
+                    {categories.map(cat => (
                         <button key={cat} onClick={() => toggleCat(cat)}
                             style={{
                                 padding: '6px 16px', borderRadius: '99px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', border: '1.5px solid',

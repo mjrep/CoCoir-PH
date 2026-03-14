@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Leaf, Shield, Truck, ShoppingBag, Star } from 'lucide-react';
-import { Products, Storefront } from '../../lib/db.js';
+import { ArrowRight, Leaf, Shield, Truck, ShoppingBag } from 'lucide-react';
+import { Products, Storefront, Categories } from '../../lib/db.js';
 import ProductCard from '../../components/ProductCard.jsx';
 
-const CATEGORIES = [
-    { name: 'Coir Rope', emoji: '🪢', desc: 'Natural fiber ropes for garden & craft' },
-    { name: 'Coir Mat', emoji: '🏠', desc: 'Handwoven door & floor mats' },
-    { name: 'Coir Net', emoji: '🕸️', desc: 'Erosion control & garden netting' },
-    { name: 'Coir Pot', emoji: '🪴', desc: 'Biodegradable hanging basket liners' },
-    { name: 'Coir Board', emoji: '📋', desc: 'Compressed fiber boards for projects' },
-    { name: 'Coir Fiber', emoji: '🌾', desc: 'Loose fiber for potting & composting' },
-    { name: 'Coir Grow Bag', emoji: '🌱', desc: 'Hydroponic grow bags, ready to use' },
-    { name: 'Other', emoji: '📦', desc: 'More premium coir products' },
-];
+const EMOJI_MAP = {
+    'Coir Rope': '🪢',
+    'Coir Mat': '🏠',
+    'Coir Net': '🕸️',
+    'Coir Pot': '🪴',
+    'Coir Board': '📋',
+    'Coir Fiber': '🌾',
+    'Coir Grow Bag': '🌱',
+    'Other': '📦',
+};
 
 function Skeleton() {
     return (
@@ -31,6 +31,7 @@ function Skeleton() {
 
 export default function HomePage() {
     const [featured, setFeatured] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const config = Storefront.get();
 
@@ -42,6 +43,7 @@ export default function HomePage() {
                 .sort((a, b) => b.sold_count - a.sold_count)
                 .slice(0, 8);
             setFeatured(f);
+            setCategories(Categories.getAll());
             setLoading(false);
         }, 500);
     }, []);
@@ -52,25 +54,26 @@ export default function HomePage() {
             <section style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
                 <div style={{
                     position: 'absolute', inset: 0,
-                    backgroundImage: config.hero_image ? `url(${config.hero_image})` : 'url(https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1600&q=80)',
+                    backgroundImage: `url('/images/hero-new.jpg')`,
                     backgroundSize: 'cover', backgroundPosition: 'center',
                 }} />
-                <div className="hero-overlay" style={{ position: 'absolute', inset: 0 }} />
+                {/* Overlay with adjusted transparency and blur to fit the dark green theme */}
+                <div className="hero-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(31, 58, 15, 0.8), rgba(31, 58, 15, 0.4))', backdropFilter: 'blur(3px)' }} />
                 <div style={{ position: 'relative', zIndex: 1, maxWidth: '1280px', margin: '0 auto', padding: '0 24px', width: '100%' }}>
                     <div style={{ maxWidth: '680px' }} className="animate-fade-in-up">
                         {config.promo_text && (
                             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(212,168,67,0.3)', border: '1px solid rgba(212,168,67,0.5)', color: '#D4A843', padding: '6px 14px', borderRadius: '99px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '20px', textTransform: 'uppercase' }}>
-                                <Star size={12} /> {config.promo_text}
+                                <span style={{ fontSize: '14px', lineHeight: 1 }}>🌴</span> {config.promo_text === 'NEW ARRIVALS' || config.promo_text === 'Philippine Made' ? '100% Natural & Eco-Friendly' : config.promo_text || '100% Natural & Eco-Friendly'}
                             </div>
                         )}
                         <h1 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: 'clamp(42px, 6vw, 72px)', fontWeight: 700, color: 'white', lineHeight: 1.1, marginBottom: '20px' }}>
-                            {config.hero_title || 'From Husk to Home'}
+                            {config.hero_title === 'From Husk to Home' ? 'Natural Coconut Coir Products' : config.hero_title || 'Natural Coconut Coir Products'}
                         </h1>
                         <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, marginBottom: '36px', maxWidth: '520px' }}>
-                            {config.hero_subtitle || 'Premium coconut coir products sustainably harvested from Philippine farms.'}
+                            {config.hero_subtitle === 'Premium coconut coir products sustainably harvested from Philippine farms.' ? 'Discover premium, eco-friendly products made from Philippine coconut fiber. Sustainable solutions for construction, gardening, and everyday living.' : config.hero_subtitle || 'Discover premium, eco-friendly products made from Philippine coconut fiber. Sustainable solutions for construction, gardening, and everyday living.'}
                         </p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
-                            <Link to="/products" style={{ textDecoration: 'none' }}>
+                            <Link to="/featured" style={{ textDecoration: 'none' }}>
                                 <button className="btn-amber" style={{ padding: '16px 36px', borderRadius: '14px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     Shop Now <ArrowRight size={18} />
                                 </button>
@@ -94,7 +97,7 @@ export default function HomePage() {
                         {[
                             { icon: <Leaf size={18} />, title: '100% Natural', desc: 'Pure coconut coir, no synthetics' },
                             { icon: <Shield size={18} />, title: 'Quality Assured', desc: 'Farm-to-door quality checks' },
-                            { icon: <Truck size={18} />, title: 'Nationwide Delivery', desc: 'Free shipping over ₱2,000' },
+                            { icon: <Truck size={18} />, title: 'Nationwide Delivery', desc: 'Fast delivery with pickup options available.' },
                         ].map((feat, i) => (
                             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '14px', color: 'white' }}>
                                 <div style={{ background: 'rgba(212,168,67,0.3)', borderRadius: '12px', padding: '12px', flexShrink: 0 }}>
@@ -106,6 +109,15 @@ export default function HomePage() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Promo Banner */}
+            <section style={{ background: '#D4A843', padding: '16px 0', textAlign: 'center' }}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div style={{ color: '#1a1a1a', fontWeight: 700, fontSize: '16px', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                        <Truck size={18} /> Promo: Free Shipping over ₱2,000
                     </div>
                 </div>
             </section>
@@ -139,13 +151,13 @@ export default function HomePage() {
                         <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700, fontSize: '36px', color: '#1a1a1a', margin: 0 }}>Product Categories</h2>
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {CATEGORIES.map(cat => (
-                            <Link key={cat.name} to={`/products?cat=${encodeURIComponent(cat.name)}`} style={{ textDecoration: 'none' }}>
+                        {categories.map(cat => (
+                            <Link key={cat.id} to={`/products?cat=${encodeURIComponent(cat.name)}`} style={{ textDecoration: 'none' }}>
                                 <div className="hover-card"
                                     style={{ background: '#FFF8F0', border: '1.5px solid #f0e8d8', borderRadius: '16px', padding: '24px 16px', textAlign: 'center', cursor: 'pointer' }}>
-                                    <div style={{ fontSize: '36px', marginBottom: '12px' }}>{cat.emoji}</div>
+                                    <div style={{ fontSize: '36px', marginBottom: '12px' }}>{EMOJI_MAP[cat.name] || '🌿'}</div>
                                     <div style={{ fontWeight: 700, color: '#2D5016', fontSize: '14px', marginBottom: '4px' }}>{cat.name}</div>
-                                    <div style={{ color: '#888', fontSize: '12px' }}>{cat.desc}</div>
+                                    <div style={{ color: '#888', fontSize: '12px' }}>{cat.description || ''}</div>
                                 </div>
                             </Link>
                         ))}
@@ -163,7 +175,7 @@ export default function HomePage() {
                                 From Husk to Home
                             </h2>
                             <p style={{ color: '#5a4030', lineHeight: 1.8, fontSize: '16px', marginBottom: '16px' }}>
-                                CocoFiber PH was born from a simple idea: transform coconut husks — a waste product of the Philippine coconut industry — into premium, eco-friendly materials for homes and gardens.
+                                CoirCraft PH was born from a simple idea: transform coconut husks — a waste product of the Philippine coconut industry — into premium, eco-friendly materials for homes and gardens.
                             </p>
                             <p style={{ color: '#5a4030', lineHeight: 1.8, fontSize: '16px', marginBottom: '32px' }}>
                                 We work directly with 50+ farm partners across the Philippines, ensuring fair wages and sustainable practices at every step of the supply chain.

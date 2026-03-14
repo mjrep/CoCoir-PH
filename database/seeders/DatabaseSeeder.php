@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
 
         // Demo users
         $users = [
-            ['email' => 'buyer@cocofiber.ph', 'password' => bcrypt('password'), 'name' => 'Juan dela Cruz', 'role' => 'user', 'mobile_number' => '09171234567', 'address' => '123 Aguinaldo St, Quezon City', 'profile_image' => ''],
-            ['email' => 'admin@cocofiber.ph', 'password' => bcrypt('password'), 'name' => 'Maria Santos', 'role' => 'admin', 'mobile_number' => '09281234567', 'address' => '456 Rizal Ave, Manila', 'profile_image' => ''],
+            ['email' => 'buyer@coircraft.ph', 'password' => bcrypt('password'), 'name' => 'Juan dela Cruz', 'role' => 'buyer', 'mobile_number' => '09171234567', 'address' => '123 Aguinaldo St, Quezon City', 'profile_image' => ''],
+            ['email' => 'seller@coircraft.ph', 'password' => bcrypt('password'), 'name' => 'Maria Santos', 'role' => 'seller', 'mobile_number' => '09281234567', 'address' => '456 Rizal Ave, Manila', 'profile_image' => ''],
         ];
 
         foreach ($users as $user) {

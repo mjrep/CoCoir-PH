@@ -33,12 +33,10 @@ export default function SignInPage() {
                 {/* Logo */}
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
                     <Link to="/" style={{ textDecoration: 'none' }}>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                            <div style={{ background: '#2D5016', borderRadius: '12px', padding: '10px' }}>
-                                <Leaf size={24} color="white" />
-                            </div>
-                            <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '28px' }}>
-                                CocoFiber<span style={{ color: '#D4A843' }}> PH</span>
+                    <div className="flex items-center justify-center gap-2 mb-8 group">
+                        <img src="/images/logo-green.png" alt="CoirCraft PH Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} className="group-hover:scale-105 transition-transform duration-300" />
+                        <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '28px' }}>
+                                CoirCraft<span style={{ color: '#D4A843' }}> PH</span>
                             </span>
                         </div>
                     </Link>
@@ -92,8 +90,8 @@ export default function SignInPage() {
                     <div style={{ marginTop: '24px', padding: '16px', background: '#f5f9f0', borderRadius: '12px', border: '1px solid #d4e8c0' }}>
                         <p style={{ fontSize: '12px', fontWeight: 700, color: '#2D5016', marginBottom: '8px' }}>Demo Credentials</p>
                         {[
-                            { label: 'Buyer', email: 'buyer@cocofiber.ph', password: 'password' },
-                            { label: 'Admin/Seller', email: 'admin@cocofiber.ph', password: 'password' },
+                            { label: 'Buyer', email: 'buyer@coircraft.ph', password: 'password' },
+                            { label: 'Admin/Seller', email: 'admin@coircraft.ph', password: 'password' },
                         ].map(cred => (
                             <button key={cred.email} type="button"
                                 onClick={() => setForm({ email: cred.email, password: cred.password })}
@@ -104,7 +102,13 @@ export default function SignInPage() {
                             </button>
                         ))}
                     </div>
-                    <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                    <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '14px' }}>Don't have an account? </span>
+                            <Link to="/signup" style={{ color: '#2D5016', textDecoration: 'none', fontSize: '14px', fontWeight: 700 }}>
+                                Sign up
+                            </Link>
+                        </div>
                         <Link to="/" style={{ color: '#2D5016', textDecoration: 'none', fontSize: '14px', fontWeight: 500 }}>
                             ← Continue browsing as guest
                         </Link>

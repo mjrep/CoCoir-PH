@@ -178,7 +178,7 @@ export default function ProductDetailPage() {
 
                         {/* Features checklist */}
                         <div style={{ background: 'white', border: '1px solid #f0e8d8', borderRadius: '16px', padding: '20px' }}>
-                            <h4 style={{ fontWeight: 700, fontSize: '14px', color: '#1a1a1a', marginBottom: '12px' }}>Why CocoFiber?</h4>
+                            <h4 style={{ fontWeight: 700, fontSize: '14px', color: '#1a1a1a', marginBottom: '12px' }}>Why CoirCraft?</h4>
                             {[
                                 'Made from 100% natural coconut fiber',
                                 'Sourced from Philippine farms',

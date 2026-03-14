@@ -1,26 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { Plus, Pencil, Trash2, Search, X, Package } from 'lucide-react';
-import { Products } from '../../lib/db.js';
+import { Products, Categories } from '../../lib/db.js';
 import { formatPrice, generateId } from '../../lib/utils.js';
 import { toast } from 'sonner';
 
-const CATEGORIES = ['Coir Rope', 'Coir Mat', 'Coir Net', 'Coir Pot', 'Coir Board', 'Coir Fiber', 'Coir Grow Bag', 'Other'];
 const FEATURED_TYPES = ['None', 'New', 'Trending', 'Best Seller'];
 
-const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: 'Coir Rope', image_url: '', featured_type: 'None', is_active: true };
+const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: '', image_url: '', featured_type: 'None', is_active: true };
 
 export default function SellerInventory() {
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState('');
     const [dialog, setDialog] = useState(null); // null | 'add' | 'edit' | 'delete'
     const [selected, setSelected] = useState(null);
     const [form, setForm] = useState(EMPTY_FORM);
 
-    const refresh = () => setProducts(Products.getAll().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+    const refresh = () => {
+        setProducts(Products.getAll().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+        setCategories(Categories.getAll().map(c => c.name).sort());
+    };
 
     useEffect(() => { refresh(); }, []);
 
-    const openAdd = () => { setForm(EMPTY_FORM); setSelected(null); setDialog('add'); };
+    const openAdd = () => { setForm({ ...EMPTY_FORM, category: categories[0] || '' }); setSelected(null); setDialog('add'); };
     const openEdit = (p) => { setSelected(p); setForm({ name: p.name, description: p.description, price: p.price, stock: p.stock, category: p.category, image_url: p.image_url || '', featured_type: p.featured_type || 'None', is_active: p.is_active }); setDialog('edit'); };
     const openDelete = (p) => { setSelected(p); setDialog('delete'); };
     const closeDialog = () => { setDialog(null); setSelected(null); };
@@ -168,7 +171,7 @@ export default function SellerInventory() {
                             <div>
                                 <label style={{ display: 'block', fontWeight: 600, fontSize: '13px', color: '#5a4030', marginBottom: '6px' }}>Category</label>
                                 <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="input-base">
-                                    {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                                    {categories.map(c => <option key={c} value={c}>{c}</option>)}
                                 </select>
                             </div>
                             <div>

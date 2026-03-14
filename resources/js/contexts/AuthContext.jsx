@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import { Users } from '../lib/db.js';
 
 const AuthContext = createContext(null);
@@ -26,6 +27,23 @@ export function AuthProvider({ children }) {
         return safeUser;
     };
 
+    const signUp = async (userData) => {
+        try {
+            const response = await axios.post('/api/register', userData);
+            const data = response.data;
+
+            const { password: _, ...safeUser } = data.user;
+            setUser(safeUser);
+            localStorage.setItem('coco_auth_user', JSON.stringify(safeUser));
+            return safeUser;
+        } catch (err) {
+            if (err.response && err.response.data && err.response.data.message) {
+                throw new Error(err.response.data.message);
+            }
+            throw err;
+        }
+    };
+
     const signOut = () => {
         setUser(null);
         localStorage.removeItem('coco_auth_user');
@@ -44,7 +62,7 @@ export function AuthProvider({ children }) {
     const isSeller = user?.role === 'seller' || user?.role === 'admin';
 
     return (
-        <AuthContext.Provider value={{ user, loading, signIn, signOut, updateMe, isAdmin, isSeller }}>
+        <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, updateMe, isAdmin, isSeller }}>
             {children}
         </AuthContext.Provider>
     );
