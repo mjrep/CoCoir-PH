@@ -195,7 +195,7 @@ export default function HomePage() {
                             </div>
                         </div>
                         <div style={{ position: 'relative' }}>
-                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80" alt="Coconut farm" style={{ width: '100%', borderRadius: '24px', objectFit: 'cover', aspectRatio: '4/3' }} />
+                            <img src="https://i0.wp.com/bioplasticsnews.com/wp-content/uploads/2019/10/coconut-husks.jpg?fit=1200%2C799&ssl=1" alt="Coconut farm" style={{ width: '100%', borderRadius: '24px', objectFit: 'cover', aspectRatio: '4/3' }} />
                             <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', background: '#2D5016', color: 'white', borderRadius: '20px', padding: '20px 24px', boxShadow: '0 8px 24px rgba(45,80,22,0.3)' }}>
                                 <div style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700, fontSize: '24px' }}>🌿</div>
                                 <div style={{ fontWeight: 700, fontSize: '14px', marginTop: '4px' }}>Sustainably Sourced</div>

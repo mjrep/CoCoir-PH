@@ -127,9 +127,9 @@ export default function TransactionsPage() {
                                                         style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '8px', background: '#f5ece0' }} />
                                                     <div style={{ flex: 1 }}>
                                                         <div style={{ fontWeight: 600, fontSize: '14px', color: '#1a1a1a' }}>{item.product_name}</div>
-                                                        <div style={{ color: '#888', fontSize: '12px' }}>×{item.quantity} · {formatPrice(item.product_price)} each</div>
+                                                        <div style={{ color: '#888', fontSize: '12px' }}>×{item.quantity} · {formatPrice(item.price || item.product_price)} each</div>
                                                     </div>
-                                                    <div style={{ fontWeight: 700, color: '#2D5016', fontSize: '14px' }}>{formatPrice(item.product_price * item.quantity)}</div>
+                                                    <div style={{ fontWeight: 700, color: '#2D5016', fontSize: '14px' }}>{formatPrice((item.price || item.product_price) * item.quantity)}</div>
                                                 </div>
                                             ))}
                                         </div>

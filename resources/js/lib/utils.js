@@ -7,7 +7,8 @@ export function cn(...inputs) {
 }
 
 export function formatPrice(amount) {
-    return `₱${Number(amount).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const val = Number(amount);
+    return `₱${(isNaN(val) ? 0 : val).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 export function generateId() {
