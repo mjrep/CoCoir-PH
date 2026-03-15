@@ -57,7 +57,7 @@ export default function AppRouter() {
 
             {/* Seller routes */}
             <Route path="/seller/signin" element={<SellerSignInPage />} />
-            <Route path="/seller/signup" element={<SignUpPage />} />
+
             
             <Route element={<ProtectedRoute role="seller"><SellerLayout /></ProtectedRoute>}>
                 <Route path="/seller" element={<SellerDashboard />} />

@@ -93,17 +93,7 @@ export default function SellerSignInPage() {
                         </button>
                     </form>
 
-                    <div style={{ marginTop: '32px', textAlign: 'center', borderTop: '1.5px solid #f1f5f9', paddingTop: '24px' }}>
-                        <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '16px' }}>
-                            Want to start selling on CoirCraft?
-                        </p>
-                        <Link to="/seller/signup" style={{ 
-                            display: 'inline-block', color: '#2D5016', textDecoration: 'none', fontWeight: 700, 
-                            fontSize: '14px', padding: '8px 20px', borderRadius: '10px', border: '1.5px solid #2D5016'
-                        }}>
-                            Become a Seller
-                        </Link>
-                    </div>
+
                 </div>
 
                 <div style={{ marginTop: '24px', textAlign: 'center' }}>
