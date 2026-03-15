@@ -21,11 +21,15 @@ class DatabaseSeeder extends Seeder
         // Demo users
         $users = [
             ['email' => 'buyer@coircraft.ph', 'password' => bcrypt('password'), 'name' => 'Juan dela Cruz', 'role' => 'buyer', 'mobile_number' => '09171234567', 'address' => '123 Aguinaldo St, Quezon City', 'profile_image' => ''],
-            ['email' => 'seller@coircraft.ph', 'password' => bcrypt('password'), 'name' => 'Maria Santos', 'role' => 'seller', 'mobile_number' => '09281234567', 'address' => '456 Rizal Ave, Manila', 'profile_image' => ''],
+            ['email' => 'seller@coircraft.ph', 'password' => bcrypt('password'), 'name' => 'Devign Seller', 'role' => 'seller', 'mobile_number' => '09281234567', 'address' => '456 Rizal Ave, Manila', 'profile_image' => ''],
         ];
 
-        foreach ($users as $user) {
-            \App\Models\User::create($user);
+        foreach ($users as $userData) {
+            \App\Models\User::updateOrCreate(
+                ['email' => $userData['email']],
+                $userData
+            );
         }
+
     }
 }
