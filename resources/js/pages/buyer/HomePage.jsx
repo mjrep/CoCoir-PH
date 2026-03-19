@@ -176,7 +176,7 @@ export default function HomePage() {
                                 From Husk to Home
                             </h2>
                             <p style={{ color: '#5a4030', lineHeight: 1.8, fontSize: '16px', marginBottom: '16px' }}>
-                                CoirCraft PH was born from a simple idea: transform coconut husks — a waste product of the Philippine coconut industry — into premium, eco-friendly materials for homes and gardens.
+                                CoCoir PH was born from a simple idea: transform coconut husks — a waste product of the Philippine coconut industry — into premium, eco-friendly materials for homes and gardens.
                             </p>
                             <p style={{ color: '#5a4030', lineHeight: 1.8, fontSize: '16px', marginBottom: '32px' }}>
                                 We work directly with 50+ farm partners across the Philippines, ensuring fair wages and sustainable practices at every step of the supply chain.

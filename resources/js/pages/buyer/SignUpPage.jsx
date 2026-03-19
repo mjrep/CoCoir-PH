@@ -62,9 +62,9 @@ export default function SignUpPage() {
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
                     <Link to="/" style={{ textDecoration: 'none' }}>
                     <div className="flex items-center justify-center gap-2 mb-8 group">
-                        <img src="/images/logo-green.png" alt="CoirCraft PH Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} className="group-hover:scale-105 transition-transform duration-300" />
+                        <img src="/images/logo-green.png" alt="CoCoir PH Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} className="group-hover:scale-105 transition-transform duration-300" />
                         <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '28px' }}>
-                                CoirCraft<span style={{ color: '#D4A843' }}> PH</span>
+                                CoCoir<span style={{ color: '#D4A843' }}> PH</span>
                             </span>
                         </div>
                     </Link>

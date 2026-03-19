@@ -34,9 +34,9 @@ export default function SellerLayout() {
             }}>
                 {/* Logo */}
                 <div style={{ padding: '20px 20px', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <img src="/images/logo-green.png" alt="CoirCraft PH Logo" style={{ height: '28px', width: 'auto', borderRadius: '4px', flexShrink: 0 }} />
+                    <img src="/images/logo-green.png" alt="CoCoir PH Logo" style={{ height: '28px', width: 'auto', borderRadius: '4px', flexShrink: 0 }} />
                     <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: 'white', fontSize: '16px', whiteSpace: 'nowrap' }}>
-                        CoirCraft <span style={{ color: '#D4A843' }}>PH</span>
+                        CoCoir <span style={{ color: '#D4A843' }}>PH</span>
                     </span>
                 </div>
 

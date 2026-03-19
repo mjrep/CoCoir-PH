@@ -42,9 +42,9 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2 group" style={{ textDecoration: 'none' }}>
-                            <img src="/images/logo-green.png" alt="CoirCraft PH Logo" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} className="group-hover:scale-105 transition-transform" />
+                            <img src="/images/logo-green.png" alt="CoCoir PH Logo" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} className="group-hover:scale-105 transition-transform" />
                             <div>
-                                <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '18px' }}>CoirCraft</span>
+                                <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: '#2D5016', fontSize: '18px' }}>CoCoir</span>
                                 <span style={{ color: '#D4A843', fontWeight: 700, fontSize: '18px' }}> PH</span>
                             </div>
                         </Link>

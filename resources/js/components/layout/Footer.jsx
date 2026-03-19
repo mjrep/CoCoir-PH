@@ -12,9 +12,9 @@ export default function Footer({ variant = 'default' }) {
                         {/* Brand */}
                         <div>
                             <div className="flex items-center gap-2 mb-6">
-                                <img src="/images/logo-yellow.png" alt="CoirCraft PH Logo" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} />
+                                <img src="/images/logo-yellow.png" alt="CoCoir PH Logo" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} />
                                 <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontWeight: 700, color: 'white', fontSize: '20px' }}>
-                                    CoirCraft <span style={{ color: '#D4A843' }}>PH</span>
+                                    CoCoir <span style={{ color: '#D4A843' }}>PH</span>
                                 </span>
                             </div>
                             <p style={{ fontSize: '14px', lineHeight: '1.7', color: '#a8c890', maxWidth: '300px' }}>
@@ -27,7 +27,7 @@ export default function Footer({ variant = 'default' }) {
                             <h3 style={{ color: 'white', fontWeight: 700, marginBottom: '24px', fontSize: '14px', letterSpacing: '1px' }}>CONTACT</h3>
                             <div className="space-y-4">
                                 {[
-                                    { Icon: Mail, text: 'devign@coircraft.ph' },
+                                    { Icon: Mail, text: 'devign@cocoir.ph' },
                                     { Icon: Phone, text: '0987654321' },
                                     { Icon: MapPin, text: 'Manila, Philippines' },
                                 ].map(({ Icon, text }, i) => (
@@ -68,7 +68,7 @@ export default function Footer({ variant = 'default' }) {
                             style={{ height: '45px', width: 'auto', opacity: 0.8 }} 
                         />
                         <p style={{ fontSize: '13px', color: '#78a060' }}>
-                            © 2026 CoirCraft PH — Devign For educational purposes only, and no copyright infringement is intended
+                            © 2026 CoCoir PH — Devign For educational purposes only, and no copyright infringement is intended
                         </p>
                     </div>
 

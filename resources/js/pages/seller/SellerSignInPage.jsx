@@ -54,7 +54,7 @@ export default function SellerSignInPage() {
                                 value={form.email}
                                 onChange={e => setForm({ ...form, email: e.target.value })}
                                 required
-                                placeholder="seller@coircraft.ph"
+                                placeholder="seller@cocoir.ph"
                                 style={{
                                     width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #e2e8f0',
                                     fontSize: '15px', transition: 'all 0.2s'

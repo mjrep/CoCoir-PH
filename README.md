@@ -1,4 +1,4 @@
-# CoirCraft PH - E-commerce Project
+# CoCoir PH - E-commerce Project
 
 ## 🚀 Quick Start / Setup
 
